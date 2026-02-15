@@ -1,89 +1,49 @@
-# Installations- & Setup-Guide: BSG Methode
+# Installations- & Setup-Guide: BSG Methode (KORRIGIERT)
 
-Dieser Guide führt Sie durch die vollständige Einrichtung der BSG-Methode (BAMF Semantic SHACL Generator), angefangen bei den System-Vorbedingungen bis hin zum ersten Start.
-
----
-
-## 1. System-Vorbedingungen (Prerequisites)
-
-Die BSG-Methode basiert auf dem BMAD-Framework und benötigt eine moderne Node.js Umgebung.
-
-### 1.1 Node.js & npm (via nvm)
-Wir empfehlen die Nutzung von **nvm** (Node Version Manager), um Versionskonflikte zu vermeiden.
-1. **nvm installieren:** Folgen Sie den Anweisungen auf [nvm.sh](https://nvm.sh).
-2. **Node.js installieren:**
-   ```bash
-   nvm install --lts
-   nvm use --lts
-   ```
-3. **Prüfen:** `node -v` und `npm -v` sollten nun funktionieren.
-
-### 1.2 KI-Interfaces (CLI)
-Die Methode kann über verschiedene KI-CLIs gesteuert werden. Installieren Sie mindestens eine der folgenden:
-*   **Gemini CLI:** `npm install -g @google/gemini-cli`
-*   **Claude Code:** `npm install -g @anthropic-ai/claude-code`
+Dieser Guide führt Sie durch die manuelle Einrichtung der BSG-Methode in einer bestehenden BMAD-Umgebung.
 
 ---
 
-## 2. BMAD Framework Setup
+## 1. Voraussetzungen (Prerequisites)
 
-BSG ist ein Modul innerhalb des BMAD-Ökosystems.
-1. Erstellen Sie ein neues Projektverzeichnis oder nutzen Sie ein bestehendes.
-2. Initialisieren Sie BMAD (falls noch nicht geschehen):
-   ```bash
-   # Folgen Sie den Anweisungen des BMAD-Installers
-   npx @bmad/installer
-   ```
+1.  **Node.js & npm:** Installiert (via nvm empfohlen).
+2.  **Gemini CLI:** Installiert (`npm install -g @google/gemini-cli`).
+3.  **Projekt-Struktur:** Ein bestehendes Verzeichnis mit einem `_bmad/` Ordner.
 
 ---
 
-## 3. BSG Modul Installation (via Git)
+## 2. Manuelle "Installation" des BSG-Moduls
 
-1. Navigieren Sie in Ihren Projektordner zu `_bmad/`.
-2. Klonen Sie das BSG-Repository:
-   ```bash
-   git clone https://github.com/ihr-organisation/bsg-module.git bsg
-   ```
-3. Registrieren Sie das Modul lokal:
-   ```bash
-   bmad install bsg --local ./bsg
-   ```
+Da BSG ein lokales Modul ist, erfolgt die Einbindung manuell:
 
----
+1.  **Code kopieren:**
+    Kopieren Sie den gesamten Ordner `bsg` in das Verzeichnis `_bmad/` Ihres Zielprojekts.
+    Pfad: `{projekt-root}/_bmad/bsg/`
 
-## 4. MCP-Server Konfiguration (Kritisch!)
+2.  **Befehle registrieren (CLI Neustart):**
+    Die Gemini-CLI scannt beim Start den `_bmad/` Ordner. Da im BSG-Ordner eine `module-help.csv` liegt, werden die Befehle (wie `/bsg_configure_governance`) automatisch geladen.
+    *Tipp: Starten Sie die CLI im Projekt-Root neu.*
 
-Die BSG-Methode benötigt spezifische Werkzeuge (Model Context Protocol), um Dokumente zu lesen und Webseiten zu scannen.
-
-### 4.1 Markitdown (PDF/Office Analyse)
-Installieren Sie den Markitdown-Server, damit Modeler Mia Dokumente lesen kann:
-```bash
-npm install -g @modelcontextprotocol/server-markitdown
-```
-
-### 4.2 Playwright (Web-Analyse)
-Installieren Sie Playwright für die Analyse von Webformularen:
-```bash
-npm install -g @modelcontextprotocol/server-playwright
-```
-
-Stellen Sie sicher, dass beide Server in Ihrer `config.json` (Gemini/Claude) registriert sind.
+3.  **Manuelle Registrierung (Falls Befehle nicht erscheinen):**
+    Sollten die Befehle nicht automatisch erscheinen, öffnen Sie die Datei `_bmad/_config/bmad-help.csv` im Hauptprojekt und fügen Sie den Inhalt der `_bmad/bsg/module-help.csv` am Ende hinzu.
 
 ---
 
-## 5. Erster Start & Verifikation
+## 3. MCP-Server einrichten (Zwingend für PDF/Web)
 
-Starten Sie Ihre CLI (Gemini oder Claude) im Projektverzeichnis.
+Die KI benötigt "Sinne", um Dokumente zu lesen.
 
-1. **Infrastruktur prüfen:**
-   Führen Sie den Befehl `/bsg_configure_governance` aus. Master Lex wird automatisch prüfen, ob die MCP-Server erreichbar sind.
-2. **Governance initialisieren:**
-   Wählen Sie im Dialog **[A] Auto-Init**, um die BAMF-Standardkonfiguration zu laden.
+1.  **Installieren:**
+    ```bash
+    npm install -g @modelcontextprotocol/server-markitdown @modelcontextprotocol/server-playwright
+    ```
+2.  **In der CLI registrieren:**
+    Stellen Sie sicher, dass Ihre `config.json` der Gemini-CLI diese Server kennt. Fragen Sie die CLI im Zweifel: *"Wie registriere ich einen MCP Server?"*
 
 ---
 
-## 6. Fehlerbehebung (Troubleshooting)
+## 4. Erster Start
 
-*   **Befehl nicht gefunden:** Stellen Sie sicher, dass das Modul in der `_bmad/bsg/module-help.csv` korrekt registriert ist.
-*   **MCP-Fehler:** Prüfen Sie mit `mcp-list` (falls vorhanden), ob die Server aktiv sind.
-*   **Berechtigungen:** Stellen Sie sicher, dass die CLI Schreibrechte im Ordner `_bmad/bsg/data/` hat.
+1. Öffnen Sie die CLI im Projektverzeichnis.
+2. Geben Sie `/bsg_configure_governance` ein.
+3. Wählen Sie **[A] Auto-Init**, um die BAMF-Pfade und Ontologien (schema.org) initial zu laden.
