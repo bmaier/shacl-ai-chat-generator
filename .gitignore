@@ -1,0 +1,23 @@
+# BSG Module Ignore Rules
+
+# Ignore generated output instances (user data)
+output/*.jsonld
+output/*.ttl
+output/*.md
+
+# Keep templates and governance configs
+!templates/
+!governance-config.yaml
+!governance.ttl
+
+# Ignore temporary system files
+.DS_Store
+Thumbs.db
+*.log
+tmp/
+
+# Keep all agent and workflow definitions
+!agents/
+!workflows/
+!module.yaml
+!module-help.csv

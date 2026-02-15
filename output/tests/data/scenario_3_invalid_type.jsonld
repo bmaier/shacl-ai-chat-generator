@@ -1,0 +1,13 @@
+{
+  "@context": {
+    "schema": "https://schema.org/",
+    "bamf": "https://bamf.de/ontology/",
+    "bamf-code": "https://bamf.de/ontology/code/"
+  },
+  "@type": "bamf:Asylantrag",
+  "schema:streetAddress": "Frankenstraße 210",
+  "schema:postalCode": "90461",
+  "schema:addressLocality": "Nürnberg",
+  "bamf:registrationDate": "2026-02-14",
+  "bamf:applicationType": { "@id": "bamf-code:Urlaubsantrag" }
+}

@@ -1,0 +1,36 @@
+code: bsg
+name: "BSG: BAMF Semantic SHACL Generator & Governance Suite"
+header: "Semantic Bridge: Transformieren Sie Fachwissen in W3C-Standards."
+subheader: "Modul zur automatisierten Generierung von SHACL-Shapes und Ontologien mit BAMF-Governance."
+default_selected: false
+
+# Custom Variables for BSG Module
+variables:
+  base_url:
+    prompt: "Was ist die Basis-URL für die Ontologien und Shapes (z.B. https://bamf.de/ontology)?"
+    default: "https://bamf.de/ontology"
+    result: "base_url: "{{result}}""
+  
+  local_resource_path:
+    prompt: "In welchem lokalen Verzeichnis liegen die Ontologien und Shapes?"
+    default: "{project-root}/_bmad/bsg/data"
+    result: "local_resource_path: "{{result}}""
+
+  expert_mode:
+    prompt: "Soll das Modul standardmäßig im Experten-Modus starten (SHACL/Ontology Begriffe)?"
+    default: "false"
+    result: "expert_mode: {{result}}"
+
+  default_output_format:
+    prompt: "Was ist das bevorzugte Standard-Ausgabeformat?"
+    options:
+      - label: "Turtle"
+        value: "turtle"
+      - label: "JSON-LD (Compact)"
+        value: "jsonld-compact"
+      - label: "JSON-LD (Extended)"
+        value: "jsonld-extended"
+      - label: "XML"
+        value: "xml"
+    default: "turtle"
+    result: "default_output_format: "{{result}}""

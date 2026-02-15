@@ -1,0 +1,38 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bamf-code: <https://bamf.de/ontology/code/> .
+
+bamf-code:ApplicationTypeScheme
+    a skos:ConceptScheme ;
+    rdfs:label "BAMF Antragstypen Codeliste"@de ;
+    skos:note "Kontrollierte Liste der möglichen Antragstypen im bsg-Modul." .
+
+bamf-code:A0001
+    a skos:Concept ;
+    skos:prefLabel "Asyl-Erstantrag"@de ;
+    skos:notation "A0001" ;
+    skos:definition "Der erste Antrag auf internationalen Schutz, der in Deutschland gestellt wird."@de ;
+    skos:inScheme bamf-code:ApplicationTypeScheme .
+
+bamf-code:A0002
+    a skos:Concept ;
+    skos:prefLabel "Folgeantrag"@de ;
+    skos:notation "A0002" ;
+    skos:definition "Ein erneuter Antrag auf Asyl nach Abschluss eines früheren Verfahrens."@de ;
+    skos:inScheme bamf-code:ApplicationTypeScheme .
+
+bamf-code:I0001
+    a skos:Concept ;
+    skos:prefLabel "Integrationskursantrag"@de ;
+    skos:notation "I0001" ;
+    skos:definition "Antrag auf Zulassung oder Verpflichtung zu einem Integrationskurs."@de ;
+    skos:inScheme bamf-code:ApplicationTypeScheme .
+
+bamf-code:R0001
+    a skos:Concept ;
+    skos:prefLabel "Rückkehrer-Antrag"@de ;
+    skos:notation "R0001" ;
+    skos:definition "Antrag auf Unterstützung bei der freiwilligen Rückkehr in das Herkunftsland."@de ;
+    skos:inScheme bamf-code:ApplicationTypeScheme .

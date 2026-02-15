@@ -1,0 +1,11 @@
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix bsg: <{{base_url}}/governance/> .
+
+bsg:Configuration
+    a rdfs:Class ;
+    rdfs:label "BSG Governance Configuration" ;
+    bsg:baseUrl "{{base_url}}" ;
+    bsg:generatedAt "{{date}}"^^xsd:date ;
+    bsg:namingPattern "{{naming_pattern}}" .
